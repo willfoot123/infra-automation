@@ -1,0 +1,15 @@
+- name: Configure Dev Environment
+  hosts: dev_servers
+  become: yes
+  tasks:
+    - name: Install Docker
+      apt:
+        name: docker.io
+        state: present
+        update_cache: yes
+
+    - name: Create user and add to the docker group
+      user:
+        name: devuser
+        groups: docker
+        append: yes
