@@ -1,0 +1,16 @@
+name: Ansible CI
+
+on:
+  push:
+    branches:
+      - infra/dev
+
+jobs: 
+ansible-lint:
+  runs-on: ubuntu-latest
+  steps:
+    - uses: actions/checkout@v3
+    - name: Install Ansible
+      run: sudo apt-get update && sudo apt-get install -y ansible
+    - name: Validate Playboom Syntax
+      run: ansible-playbook --syntax-check playbooks/install_docker.yml
